@@ -34,13 +34,6 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.springframework.web: DEBUG
-    #feign: DEBUG
-
-feign:
-  client:
-    config:
-      default:
-        loggerLevel: FULL
 
 management:
   endpoints:
