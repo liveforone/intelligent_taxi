@@ -20,5 +20,8 @@
 
 # 4. 프로젝트 설계 문서
 * [수익 모델](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/PROFIT.md)
+* [전반 설계](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/DESIGN.md)
+* [DB 설계](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/DB_DESIGN.md)
+* [화면 설계](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/INTERFACE_DESIGN.md)
 
 # 5. 새롭게 알게된 점
