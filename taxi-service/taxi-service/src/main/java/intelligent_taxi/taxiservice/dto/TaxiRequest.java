@@ -1,6 +1,5 @@
 package intelligent_taxi.taxiservice.dto;
 
-import intelligent_taxi.taxiservice.domain.TaxiGrade;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
