@@ -42,8 +42,8 @@ public class Taxi {
 
     public static Taxi create(TaxiRequest requestDto, String username) {
         return new Taxi(
-                requestDto.getRegion(),
-                requestDto.getTaxiGrade(),
+                Region.matchRegion(requestDto.getRegion()),
+                TaxiGrade.matchGrade(requestDto.getTaxiGrade()),
                 requestDto.getLicenseNum(),
                 requestDto.getPhoneNum(),
                 username
