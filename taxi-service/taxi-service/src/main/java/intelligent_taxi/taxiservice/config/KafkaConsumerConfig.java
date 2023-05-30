@@ -17,7 +17,7 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
 
-    private static final String CONSUMER_GROUP_ID = "maybeAllHereGroup";
+    private static final String CONSUMER_GROUP_ID = "intelligentTaxiGroup";
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
