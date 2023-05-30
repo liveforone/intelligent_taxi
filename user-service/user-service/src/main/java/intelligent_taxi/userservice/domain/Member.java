@@ -44,15 +44,13 @@ public class Member implements UserDetails {
 
     private long reports;
 
-    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
-    private Role auth;
+    private String auth;
 
-    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
-    private MemberState memberState;
+    private String memberState;
 
-    private Member(String username, String email, String password, String realName, String bankbookNum, Role auth) {
+    private Member(String username, String email, String password, String realName, String bankbookNum, String auth) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -60,7 +58,7 @@ public class Member implements UserDetails {
         this.bankbookNum = bankbookNum;
         this.reports = 0;
         this.auth = auth;
-        this.memberState = MemberState.WORK;
+        this.memberState = MemberState.WORK.name();
     }
 
     public static Member createMember(MemberSignupRequest request) {
@@ -70,7 +68,7 @@ public class Member implements UserDetails {
                 PasswordUtils.encodePassword(request.getPassword()),
                 request.getRealName(),
                 request.getBankbookNum(),
-                Role.MEMBER
+                Role.MEMBER.getAuth()
         );
     }
 
@@ -81,7 +79,7 @@ public class Member implements UserDetails {
                 PasswordUtils.encodePassword(request.getPassword()),
                 request.getRealName(),
                 request.getBankbookNum(),
-                Role.TAXI
+                Role.TAXI.getAuth()
         );
     }
 
@@ -99,13 +97,13 @@ public class Member implements UserDetails {
 
     public void increaseReport() {
         if (MemberBlockPolicy.BLOCK_CHECK_REPORT == this.getReports()) {
-            this.memberState = MemberState.BLOCK;
+            this.memberState = MemberState.BLOCK.name();
         }
         this.reports += MemberConstant.ONE;
     }
 
     public void cancelBlock() {
-        this.memberState = MemberState.WORK;
+        this.memberState = MemberState.WORK.name();
         this.reports -= MemberConstant.ONE;
     }
 
@@ -117,7 +115,7 @@ public class Member implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authList = new ArrayList<>();
-        authList.add(new SimpleGrantedAuthority(auth.getValue()));
+        authList.add(new SimpleGrantedAuthority(auth));
         return authList;
     }
 
