@@ -10,5 +10,5 @@ public enum Role {
     TAXI("ROLE_TAXI"),
     MEMBER("ROLE_MEMBER");
 
-    private String value;
+    private String auth;
 }
