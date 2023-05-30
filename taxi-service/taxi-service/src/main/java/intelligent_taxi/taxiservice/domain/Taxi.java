@@ -16,12 +16,10 @@ public class Taxi {
     private Long id;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Region region;
+    private String region;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TaxiGrade taxiGrade;
+    private String taxiGrade;
 
     @Column(nullable = false, unique = true)
     private String licenseNum;
@@ -32,7 +30,7 @@ public class Taxi {
     @Column(nullable = false, unique = true)
     private String username;
 
-    private Taxi(Region region, TaxiGrade taxiGrade, String licenseNum, String phoneNum, String username) {
+    private Taxi(String region, String taxiGrade, String licenseNum, String phoneNum, String username) {
         this.region = region;
         this.taxiGrade = taxiGrade;
         this.licenseNum = licenseNum;
