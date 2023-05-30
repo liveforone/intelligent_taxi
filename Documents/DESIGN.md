@@ -78,3 +78,7 @@
 ## provide API 
 * 프로젝트 내에 다른 마이크로 서비스에 제공하는 api는 /provide로 시작하게 네이밍한다.
 * 자사의 타 프로젝트에서도 사용가능하도록 한다.
+
+## enum 문자열로 변환하여 저장
+* [enum 저장 이슈](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/JPA_ENUM_ISSUE.md)에서도 볼 수 있듯이 
+* enum을 저장할땐 안전하게 문자열로 변환하여 저장하도록 한다.
