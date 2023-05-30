@@ -49,4 +49,12 @@ public class Taxi {
                 username
         );
     }
+
+    public void updateRegion(String region) {
+        this.region = Region.matchRegion(region);
+    }
+
+    public void updateGrade(String grade) {
+        this.taxiGrade = TaxiGrade.matchGrade(grade);
+    }
 }
