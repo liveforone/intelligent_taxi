@@ -1,6 +1,5 @@
 package intelligent_taxi.taxiservice.dto;
 
-import intelligent_taxi.taxiservice.domain.Region;
 import intelligent_taxi.taxiservice.domain.TaxiGrade;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -11,7 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TaxiRequest {
 
-    private Region region;
+    @NotBlank(message = "지역을 선택하세요.")
+    private String region;
     private TaxiGrade taxiGrade;
 
     @NotBlank(message = "차량 번호를 입력하세요.(번호판 참조)")
