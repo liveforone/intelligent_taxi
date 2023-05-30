@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
@@ -22,7 +24,7 @@ public class CustomUserDetailService implements UserDetailsService {
     }
 
     private UserDetails createUserDetails(Member member) {
-        if (member.getAuth() == Role.TAXI) {
+        if (Objects.equals(member.getAuth(), Role.TAXI.getAuth())) {
             String TAXI_ROLE = "TAXI";
             return User.builder()
                     .username(member.getUsername())
