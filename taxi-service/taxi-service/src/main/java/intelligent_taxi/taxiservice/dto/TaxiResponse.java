@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class TaxiResponse {
 
     private Long id;
-    private Region region;
-    private TaxiGrade taxiGrade;
+    private String region;
+    private String taxiGrade;
     private String licenseNum;
     private String phoneNum;
 }
