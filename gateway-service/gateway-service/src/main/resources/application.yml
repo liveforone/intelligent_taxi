@@ -35,29 +35,29 @@ spring:
               args:
                 name: taxi-user-service
                 fallbackuri: forward:/fallback/user
-#        - id: bankbook-service-provide
-#          uri: lb://BANKBOOK-SERVICE
-#          predicates:
-#            - Path=/bankbook-service/provide/**
-#          filters:
-#            - RemoveRequestHeader=Cookie
-#            - RewritePath=/bankbook-service/(?<segment>.*), /$\{segment}
-#            - name: CircuitBreaker
-#              args:
-#                name: bankbook-service
-#                fallbackuri: forward:/fallback/bankbook
-#        - id: bankbook-service-other
-#          uri: lb://BANKBOOK-SERVICE
-#          predicates:
-#            - Path=/bankbook-service/**
-#          filters:
-#            - RemoveRequestHeader=Cookie
-#            - RewritePath=/bankbook-service/(?<segment>.*), /$\{segment}
-#            - AuthorizationHeaderFilter
-#            - name: CircuitBreaker
-#              args:
-#                name: bankbook-service
-#                fallbackuri: forward:/fallback/bankbook
+        - id: taxi-service-provide
+          uri: lb://TAXI-SERVICE
+          predicates:
+            - Path=/taxi-service/provide/**
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/taxi-service/(?<segment>.*), /$\{segment}
+            - name: CircuitBreaker
+              args:
+                name: taxi-service
+                fallbackuri: forward:/fallback/taxi
+        - id: taxi-service-other
+          uri: lb://TAXI-SERVICE
+          predicates:
+            - Path=/taxi-service/**
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/taxi-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
+            - name: CircuitBreaker
+              args:
+                name: taxi-service
+                fallbackuri: forward:/fallback/taxi
 
 management:
   endpoints:
