@@ -1,5 +1,6 @@
 package intelligent_taxi.taxiservice.domain;
 
+import intelligent_taxi.taxiservice.dto.TaxiRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -23,19 +24,29 @@ public class Taxi {
     private TaxiGrade taxiGrade;
 
     @Column(nullable = false, unique = true)
-    private String username;
-
-    @Column(nullable = false, unique = true)
     private String licenseNum;
 
     @Column(nullable = false, unique = true)
     private String phoneNum;
 
-    private Taxi(Region region, TaxiGrade taxiGrade, String username, String licenseNum, String phoneNum) {
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    private Taxi(Region region, TaxiGrade taxiGrade, String licenseNum, String phoneNum, String username) {
         this.region = region;
         this.taxiGrade = taxiGrade;
-        this.username = username;
         this.licenseNum = licenseNum;
         this.phoneNum = phoneNum;
+        this.username = username;
+    }
+
+    public static Taxi create(TaxiRequest requestDto, String username) {
+        return new Taxi(
+                requestDto.getRegion(),
+                requestDto.getTaxiGrade(),
+                requestDto.getLicenseNum(),
+                requestDto.getPhoneNum(),
+                username
+        );
     }
 }
