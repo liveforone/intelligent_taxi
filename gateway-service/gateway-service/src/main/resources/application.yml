@@ -34,7 +34,7 @@ spring:
             - name: CircuitBreaker
               args:
                 name: taxi-user-service
-                fallbackuri: forward:/fallback/taxi
+                fallbackuri: forward:/fallback/user
 #        - id: bankbook-service-provide
 #          uri: lb://BANKBOOK-SERVICE
 #          predicates:
