@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum KafkaLog {
 
     KAFKA_RECEIVE_LOG("Consumer receive Kafka Message -> "),
+    KAFKA_SEND_LOG("Kafka send Success | Topic : "),
     KAFKA_NULL_LOG("!! Kafka Message is Null !!"),
     INCREASE_REPORT("Increase report | Username : ");
 
