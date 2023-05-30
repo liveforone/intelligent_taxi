@@ -3,6 +3,7 @@
 ## DB 생성
 ```
 CREATE DATABASE intelligent_taxi_user;
+CREATE DATABASE intelligent_taxi_taxi;
 ```
 
 ## DB별 테이블(인덱스 포함) 모델링
@@ -21,6 +22,18 @@ CREATE TABLE member (
 );
 CREATE INDEX email_idx ON member (email);
 CREATE INDEX username_idx ON member (username);
+```
+### TAXI DB
+```
+create table taxi (
+    id bigint not null auto_increment,
+    license_num varchar(255) not null,
+    phone_num varchar(255) not null,
+    region varchar(255) not null,
+    taxi_grade varchar(255) not null,
+    username varchar(255) not null,
+    primary key (id)
+);
 ```
 ### DISPATCH DB
 ### ORDERS DB
