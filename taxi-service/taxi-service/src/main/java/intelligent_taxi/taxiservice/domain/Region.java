@@ -1,5 +1,7 @@
 package intelligent_taxi.taxiservice.domain;
 
+import intelligent_taxi.taxiservice.controller.restResponse.ResponseMessage;
+import intelligent_taxi.taxiservice.exception.TaxiCustomException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -21,4 +23,14 @@ public enum Region {
     JEJU("제주");
     
     private final String region;
+
+    public static Region matchRegion(String region) {
+        for (Region regionVal : Region.values()) {
+            if (regionVal.getRegion().equalsIgnoreCase(region)) {
+                return regionVal;
+            }
+        }
+
+        throw new TaxiCustomException(ResponseMessage.NOT_EXIST_REGION);
+    }
 }
