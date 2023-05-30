@@ -2,6 +2,7 @@ package intelligent_taxi.userservice.controller;
 
 import intelligent_taxi.userservice.authentication.AuthenticationInfo;
 import intelligent_taxi.userservice.command.MemberCommandService;
+import intelligent_taxi.userservice.command.MemberProducer;
 import intelligent_taxi.userservice.controller.constant.ControllerLog;
 import intelligent_taxi.userservice.controller.constant.MemberParam;
 import intelligent_taxi.userservice.controller.restResponse.RestResponse;
@@ -35,6 +36,7 @@ public class MemberController {
 
     private final MemberCommandService memberCommandService;
     private final MemberQueryService memberQueryService;
+    private final MemberProducer memberProducer;
     private final ControllerValidator controllerValidator;
     private final AuthenticationInfo authenticationInfo;
 
@@ -136,6 +138,7 @@ public class MemberController {
 
         String username = authenticationInfo.getUsername(request);
         memberCommandService.withdrawByUsername(requestDto, username);
+        memberProducer.removeTaxi(username);
         log.info(ControllerLog.WITHDRAW_SUCCESS.getValue() + username);
 
         return RestResponse.withdrawSuccess();
