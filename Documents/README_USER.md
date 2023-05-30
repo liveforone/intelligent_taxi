@@ -26,9 +26,9 @@
 ### 내부 API
 ```
 [GET] / : 홈(토큰 불필요)
-[GET/POST] /signup/member : 회원가입(토큰 불필요), MemberRequest 형식 필요
-[GET/POST] /signup/taxi : 회원가입(토큰 불필요), MemberRequest 형식 필요
-[GET/POST] /login : 로그인(토큰 불필요)
+[POST] /signup/member : 회원가입(토큰 불필요), MemberRequest 형식 필요
+[POST] /signup/taxi : 회원가입(토큰 불필요), MemberRequest 형식 필요
+[POST] /login : 로그인(토큰 불필요)
 [GET] /logout : 로그아웃, get으로 받아도 정상 작동(토큰 불필요)
 [GET] /my-info : 마이페이지(토큰 필요)
 [Put] /change/email : 이메일 변경(토큰 필요), ChangeEmailRequest 형식
@@ -75,6 +75,12 @@ increase-report
 * report-service에서 produce한다.
 ```
 cancel-block
+```
+### 회원 탈퇴시 택시 회원의 택시 정보 삭제
+* kafka를 사용한다.
+* taxi-service 가 listen 한다.
+```
+remove-taxi-belong-member
 ```
 
 ## 계정 정지 정책과 코드
