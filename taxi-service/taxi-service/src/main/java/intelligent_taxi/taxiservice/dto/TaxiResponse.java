@@ -15,7 +15,7 @@ public class TaxiResponse {
 
     private Long id;
     private String region;
-    private String taxiGrade;
+    private TaxiGrade taxiGrade;
     private String licenseNum;
     private String phoneNum;
 }
