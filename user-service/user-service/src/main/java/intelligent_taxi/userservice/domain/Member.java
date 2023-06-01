@@ -1,5 +1,7 @@
 package intelligent_taxi.userservice.domain;
 
+import intelligent_taxi.userservice.converter.MemberStateConverter;
+import intelligent_taxi.userservice.converter.RoleConverter;
 import intelligent_taxi.userservice.domain.util.MemberBlockPolicy;
 import intelligent_taxi.userservice.domain.util.MemberConstant;
 import intelligent_taxi.userservice.domain.util.PasswordUtils;
@@ -44,13 +46,15 @@ public class Member implements UserDetails {
 
     private long reports;
 
+    @Convert(converter = RoleConverter.class)
     @Column(nullable = false)
-    private String auth;
+    private Role auth;
 
+    @Convert(converter = MemberStateConverter.class)
     @Column(nullable = false)
-    private String memberState;
+    private MemberState memberState;
 
-    private Member(String username, String email, String password, String realName, String bankbookNum, String auth) {
+    private Member(String username, String email, String password, String realName, String bankbookNum, Role auth) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -58,7 +62,7 @@ public class Member implements UserDetails {
         this.bankbookNum = bankbookNum;
         this.reports = 0;
         this.auth = auth;
-        this.memberState = MemberState.WORK.name();
+        this.memberState = MemberState.WORK;
     }
 
     public static Member createMember(MemberSignupRequest request) {
@@ -68,7 +72,7 @@ public class Member implements UserDetails {
                 PasswordUtils.encodePassword(request.getPassword()),
                 request.getRealName(),
                 request.getBankbookNum(),
-                Role.MEMBER.getAuth()
+                Role.MEMBER
         );
     }
 
@@ -79,7 +83,7 @@ public class Member implements UserDetails {
                 PasswordUtils.encodePassword(request.getPassword()),
                 request.getRealName(),
                 request.getBankbookNum(),
-                Role.TAXI.getAuth()
+                Role.TAXI
         );
     }
 
@@ -97,13 +101,13 @@ public class Member implements UserDetails {
 
     public void increaseReport() {
         if (MemberBlockPolicy.BLOCK_CHECK_REPORT == this.getReports()) {
-            this.memberState = MemberState.BLOCK.name();
+            this.memberState = MemberState.BLOCK;
         }
         this.reports += MemberConstant.ONE;
     }
 
     public void cancelBlock() {
-        this.memberState = MemberState.WORK.name();
+        this.memberState = MemberState.WORK;
         this.reports -= MemberConstant.ONE;
     }
 
@@ -115,7 +119,7 @@ public class Member implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authList = new ArrayList<>();
-        authList.add(new SimpleGrantedAuthority(auth));
+        authList.add(new SimpleGrantedAuthority(auth.getAuth()));
         return authList;
     }
 
