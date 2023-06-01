@@ -25,8 +25,8 @@ class TaxiTest {
         Taxi taxi = Taxi.create(request, username);
 
         //then
-        assertThat(taxi.getTaxiGrade()).isEqualTo(TaxiGrade.VAN.name());
-        assertThat(taxi.getRegion()).isEqualTo(Region.SEOUL.getRegion());
+        assertThat(taxi.getTaxiGrade()).isEqualTo(TaxiGrade.VAN);
+        assertThat(taxi.getRegion()).isEqualTo(Region.SEOUL);
     }
 
     @Test
@@ -49,7 +49,7 @@ class TaxiTest {
         taxi.updateRegion(updatedRegion);
 
         //then
-        assertThat(taxi.getRegion()).isEqualTo(Region.INCHEON.getRegion());
+        assertThat(taxi.getRegion()).isEqualTo(Region.INCHEON);
     }
 
     @Test
@@ -72,6 +72,6 @@ class TaxiTest {
         taxi.updateGrade(updatedGrade);
 
         //then
-        assertThat(taxi.getTaxiGrade()).isEqualTo(TaxiGrade.NORMAL.name());
+        assertThat(taxi.getTaxiGrade()).isEqualTo(TaxiGrade.NORMAL);
     }
 }
