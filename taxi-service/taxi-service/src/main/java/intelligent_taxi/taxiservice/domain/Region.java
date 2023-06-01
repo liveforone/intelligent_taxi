@@ -24,10 +24,10 @@ public enum Region {
     
     private final String region;
 
-    public static String matchRegion(String region) {
+    public static Region matchRegion(String region) {
         for (Region regionVal : Region.values()) {
             if (regionVal.getRegion().equalsIgnoreCase(region)) {
-                return regionVal.region;
+                return regionVal;
             }
         }
 
