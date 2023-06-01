@@ -20,20 +20,21 @@ CREATE TABLE member (
     username varchar(255) UNIQUE not null,
     primary key (id)
 );
-CREATE INDEX email_idx ON member (email);
-CREATE INDEX username_idx ON member (username);
+CREATE UNIQUE INDEX email_idx ON member (email);
+CREATE UNIQUE INDEX username_idx ON member (username);
 ```
 ### TAXI DB
 ```
 create table taxi (
     id bigint not null auto_increment,
-    license_num varchar(255) not null,
-    phone_num varchar(255) not null,
+    license_num varchar(255) UNIQUE not null,
+    phone_num varchar(255) UNIQUE not null,
     region varchar(255) not null,
     taxi_grade varchar(255) not null,
-    username varchar(255) not null,
+    username varchar(255) UNIQUE not null,
     primary key (id)
 );
+CREATE UNIQUE INDEX username_idx ON taxi (username);
 ```
 ### DISPATCH DB
 ### ORDERS DB
@@ -54,3 +55,4 @@ create table taxi (
 * 쿠팡이 대표적인 예시로 제품의 이미지와 이름은 catalog팀에서,
 * 가격은 pricing 팀에서 재고 정보는 fulfillment 팀에서 제공하는 방식으로 하여 유연성을 높였다.
 * 이러한 설계는향후 거대한 시스템과 대규모 트래픽 대응, 대용량 데이터처리에 훨씬 용이해질 것이다.
+* 인덱스는 유니크 컬럼의 경우 유니크 인덱스를 사용한다.
