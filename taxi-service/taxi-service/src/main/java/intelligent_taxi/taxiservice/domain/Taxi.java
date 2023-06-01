@@ -1,5 +1,7 @@
 package intelligent_taxi.taxiservice.domain;
 
+import intelligent_taxi.taxiservice.converter.RegionConverter;
+import intelligent_taxi.taxiservice.converter.TaxiGradeConverter;
 import intelligent_taxi.taxiservice.dto.TaxiRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -15,11 +17,13 @@ public class Taxi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Convert(converter = RegionConverter.class)
     @Column(nullable = false)
-    private String region;
+    private Region region;
 
+    @Convert(converter = TaxiGradeConverter.class)
     @Column(nullable = false)
-    private String taxiGrade;
+    private TaxiGrade taxiGrade;
 
     @Column(nullable = false, unique = true)
     private String licenseNum;
@@ -30,7 +34,7 @@ public class Taxi {
     @Column(nullable = false, unique = true)
     private String username;
 
-    private Taxi(String region, String taxiGrade, String licenseNum, String phoneNum, String username) {
+    private Taxi(Region region, TaxiGrade taxiGrade, String licenseNum, String phoneNum, String username) {
         this.region = region;
         this.taxiGrade = taxiGrade;
         this.licenseNum = licenseNum;
