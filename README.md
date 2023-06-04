@@ -19,7 +19,17 @@
 6. [이슈](#6-이슈)
 
 # 1. 프로젝트 소개
+## 프로젝트 소개 문서
 * [프로젝트 소개](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/INTRODUCE.md)
+## 기술스택
+* Framework : Spring Boot 3.1.0 & Spring Cloud(2022.0.3)
+* Lang : Java17
+* Data : Spring Data Jpa & Query Dsl & MySql
+* Security : Spring Security & Jwt
+* Service Communication : Apache Kafka(Async), Open Feign Client(Sync)
+* Container : Docker & Docker-compose
+* Test : Junit5
+* Util : Apache Commons Lang3, LomBok
 
 # 2. 프로젝트 고민점
 * [중복된 값을 가져서는 안되는 Unique 컬럼의 업데이트](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/UNIQUE_COLUMN_UPDATE_PROBLEM.md)
