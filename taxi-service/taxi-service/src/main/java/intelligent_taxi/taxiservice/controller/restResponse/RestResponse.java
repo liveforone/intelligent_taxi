@@ -9,4 +9,8 @@ public class RestResponse {
                 .status(ResponseMessage.CREATE_TAXI_SUCCESS.getStatus())
                 .body(ResponseMessage.CREATE_TAXI_SUCCESS.getValue());
     }
+
+    public static ResponseEntity<?> updateRegionSuccess() {
+        return ResponseEntity.ok(ResponseMessage.UPDATE_REGION_SUCCESS.getValue());
+    }
 }
