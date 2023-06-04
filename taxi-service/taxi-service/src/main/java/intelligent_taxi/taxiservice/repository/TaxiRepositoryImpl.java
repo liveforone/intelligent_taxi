@@ -19,4 +19,11 @@ public class TaxiRepositoryImpl implements TaxiCustomRepository {
                 .where(taxi.id.eq(id))
                 .fetchOne();
     }
+
+    public Taxi findOneByUsername(String username) {
+        return queryFactory
+                .selectFrom(taxi)
+                .where(taxi.username.eq(username))
+                .fetchOne();
+    }
 }
