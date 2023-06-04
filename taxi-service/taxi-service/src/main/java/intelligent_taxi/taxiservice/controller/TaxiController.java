@@ -6,7 +6,8 @@ import intelligent_taxi.taxiservice.controller.constant.ControllerLog;
 import intelligent_taxi.taxiservice.controller.constant.TaxiParam;
 import intelligent_taxi.taxiservice.controller.restResponse.RestResponse;
 import intelligent_taxi.taxiservice.dto.TaxiRequest;
-import intelligent_taxi.taxiservice.dto.UpdateRegion;
+import intelligent_taxi.taxiservice.dto.UpdateGradeRequest;
+import intelligent_taxi.taxiservice.dto.UpdateRegionReqeust;
 import intelligent_taxi.taxiservice.validator.ControllerValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -45,7 +46,7 @@ public class TaxiController {
     @PutMapping(UPDATE_REGION)
     public ResponseEntity<?> updateRegion(
             @PathVariable(TaxiParam.ID) Long id,
-            @RequestBody @Valid UpdateRegion requestDto,
+            @RequestBody @Valid UpdateRegionReqeust requestDto,
             BindingResult bindingResult,
             HttpServletRequest request
     ) {
@@ -57,5 +58,22 @@ public class TaxiController {
         log.info(ControllerLog.UPDATE_REGION_SUCCESS.getLog() + id);
 
         return RestResponse.updateRegionSuccess();
+    }
+
+    @PutMapping(UPDATE_GRADE)
+    public ResponseEntity<?> updateGrade(
+            @PathVariable(TaxiParam.ID) Long id,
+            @RequestBody @Valid UpdateGradeRequest requestDto,
+            BindingResult bindingResult,
+            HttpServletRequest request
+    ) {
+        controllerValidator.validateBinding(bindingResult);
+
+        taxiCommandService.updateGrade(
+                requestDto, authenticationInfo.getUsername(request), id
+        );
+        log.info(ControllerLog.UPDATE_GRADE_SUCCESS.getLog() + id);
+
+        return RestResponse.updateGradeSuccess();
     }
 }
