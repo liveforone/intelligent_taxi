@@ -13,4 +13,8 @@ public class RestResponse {
     public static ResponseEntity<?> updateRegionSuccess() {
         return ResponseEntity.ok(ResponseMessage.UPDATE_REGION_SUCCESS.getValue());
     }
+
+    public static ResponseEntity<?> updateGradeSuccess() {
+        return ResponseEntity.ok(ResponseMessage.UPDATE_GRADE_SUCCESS.getValue());
+    }
 }
