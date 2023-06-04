@@ -18,7 +18,7 @@ import static intelligent_taxi.taxiservice.kafka.Topic.*;
 @Slf4j
 public class TaxiConsumer {
 
-    //service 호출
+    private final TaxiCommandService taxiCommandService;
     ObjectMapper objectMapper = new ObjectMapper();
 
     @KafkaListener(topics = REMOVE_TAXI)
@@ -31,7 +31,7 @@ public class TaxiConsumer {
         if (CommonUtils.isNull(username)) {
             log.info(KafkaLog.KAFKA_NULL_LOG.getValue());
         } else {
-            //delete logic
+            taxiCommandService.deleteOneByUsername(username);
             log.info(KafkaLog.REMOVE_TAXI_BELONG_MEMBER.getValue() + username);
         }
     }
