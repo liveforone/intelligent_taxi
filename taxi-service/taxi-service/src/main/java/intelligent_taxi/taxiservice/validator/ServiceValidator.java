@@ -14,7 +14,7 @@ public class ServiceValidator {
 
     private final TaxiRepository taxiRepository;
 
-    public void validateUsernameAndId(String username, Long id) {
+    public Taxi validateUsernameAndId(String username, Long id) {
         Taxi taxi = taxiRepository.findOneById(id);
 
         if (CommonUtils.isNull(taxi)) {
@@ -24,5 +24,21 @@ public class ServiceValidator {
         if (!taxi.getUsername().equals(username)) {
             throw new TaxiCustomException(ResponseMessage.NOT_MATCH_USERNAME);
         }
+
+        return taxi;
+    }
+
+    public Taxi validateDeleteOneByUsername(String username) {
+        Taxi taxi = taxiRepository.findOneByUsername(username);
+
+        if (CommonUtils.isNull(taxi)) {
+            throw new TaxiCustomException(ResponseMessage.TAXI_IS_NULL);
+        }
+
+        if (!taxi.getUsername().equals(username)) {
+            throw new TaxiCustomException(ResponseMessage.NOT_MATCH_USERNAME);
+        }
+
+        return taxi;
     }
 }
