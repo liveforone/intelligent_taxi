@@ -1,5 +1,6 @@
 package intelligent_taxi.taxiservice.command;
 
+import intelligent_taxi.taxiservice.domain.Taxi;
 import intelligent_taxi.taxiservice.dto.TaxiRequest;
 import intelligent_taxi.taxiservice.repository.TaxiRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,5 +14,8 @@ public class TaxiCommandService {
 
     private final TaxiRepository taxiRepository;
 
-
+    public Long createTaxi(TaxiRequest requestDto, String username) {
+        Taxi taxi = Taxi.create(requestDto, username);
+        return taxiRepository.save(taxi).getId();
+    }
 }
