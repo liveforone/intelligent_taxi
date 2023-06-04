@@ -3,8 +3,10 @@ package intelligent_taxi.taxiservice.controller;
 import intelligent_taxi.taxiservice.authentication.AuthenticationInfo;
 import intelligent_taxi.taxiservice.command.TaxiCommandService;
 import intelligent_taxi.taxiservice.controller.constant.ControllerLog;
+import intelligent_taxi.taxiservice.controller.constant.TaxiParam;
 import intelligent_taxi.taxiservice.controller.restResponse.RestResponse;
 import intelligent_taxi.taxiservice.dto.TaxiRequest;
+import intelligent_taxi.taxiservice.dto.UpdateRegion;
 import intelligent_taxi.taxiservice.validator.ControllerValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -12,9 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static intelligent_taxi.taxiservice.controller.constant.TaxiUrl.*;
 
@@ -40,5 +40,22 @@ public class TaxiController {
         log.info(ControllerLog.CREATE_TAXI_SUCCESS.getLog());
 
         return RestResponse.createTaxiSuccess();
+    }
+
+    @PutMapping(UPDATE_REGION)
+    public ResponseEntity<?> updateRegion(
+            @PathVariable(TaxiParam.ID) Long id,
+            @RequestBody @Valid UpdateRegion requestDto,
+            BindingResult bindingResult,
+            HttpServletRequest request
+    ) {
+        controllerValidator.validateBinding(bindingResult);
+
+        taxiCommandService.updateRegion(
+                requestDto, authenticationInfo.getUsername(request), id
+        );
+        log.info(ControllerLog.UPDATE_REGION_SUCCESS.getLog() + id);
+
+        return RestResponse.updateRegionSuccess();
     }
 }
