@@ -1,7 +1,9 @@
 package intelligent_taxi.taxiservice.command;
 
 import intelligent_taxi.taxiservice.domain.Region;
+import intelligent_taxi.taxiservice.domain.TaxiGrade;
 import intelligent_taxi.taxiservice.dto.TaxiRequest;
+import intelligent_taxi.taxiservice.dto.UpdateGradeRequest;
 import intelligent_taxi.taxiservice.dto.UpdateRegionRequest;
 import intelligent_taxi.taxiservice.query.TaxiQueryService;
 import jakarta.persistence.EntityManager;
@@ -65,7 +67,7 @@ class TaxiCommandServiceTest {
         String username = "dflsjfoefneowfoaefoijf";
         String region = "seoul";
         String taxiGrade = "NORMAL";
-        String licenseNum = "00아0000";
+        String licenseNum = "00바0000";
         String phoneNum = "01000000000";
         Long taxiId = createTaxi(username, region, taxiGrade, licenseNum, phoneNum);
         em.flush();
@@ -87,6 +89,27 @@ class TaxiCommandServiceTest {
     @Test
     @Transactional
     void updateGradeTest() {
+        //given
+        String username = "dflsjfoefneowfoaefoijf";
+        String region = "seoul";
+        String taxiGrade = "NORMAL";
+        String licenseNum = "00사0000";
+        String phoneNum = "01000000000";
+        Long taxiId = createTaxi(username, region, taxiGrade, licenseNum, phoneNum);
+        em.flush();
+        em.clear();
+
+        //when
+        String updatedGrade = "premium";
+        UpdateGradeRequest request = new UpdateGradeRequest();
+        request.setTaxiGrade(updatedGrade);
+        taxiCommandService.updateGrade(request, username, taxiId);
+        em.flush();
+        em.clear();
+
+        //then
+        assertThat(taxiQueryService.getTaxiById(taxiId).getTaxiGrade())
+                .isEqualTo(TaxiGrade.PREMIUM);
     }
 
     @Test
