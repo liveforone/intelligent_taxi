@@ -138,5 +138,23 @@ class TaxiCommandServiceTest {
     @Test
     @Transactional
     void deleteOneByIdTest() {
+        //given
+        String username = "dflsjfoefneowfoaefoijf";
+        String region = "전남";
+        String taxiGrade = "NORMAL";
+        String licenseNum = "00자0000";
+        String phoneNum = "01000000000";
+        Long taxiId = createTaxi(username, region, taxiGrade, licenseNum, phoneNum);
+        em.flush();
+        em.clear();
+
+        //when
+        taxiCommandService.deleteOneById(taxiId, username);
+        em.flush();
+        em.clear();
+
+        //then
+        assertThat(taxiQueryService.getTaxiById(taxiId).getId())
+                .isNull();
     }
 }
