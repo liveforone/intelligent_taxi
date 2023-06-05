@@ -17,4 +17,8 @@ public class RestResponse {
     public static ResponseEntity<?> updateGradeSuccess() {
         return ResponseEntity.ok(ResponseMessage.UPDATE_GRADE_SUCCESS.getValue());
     }
+
+    public static ResponseEntity<?> deleteTaxiSuccess() {
+        return ResponseEntity.ok(ResponseMessage.DELETE_TAXI_SUCCESS.getValue());
+    }
 }
