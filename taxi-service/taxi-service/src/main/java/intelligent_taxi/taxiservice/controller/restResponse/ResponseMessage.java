@@ -11,6 +11,7 @@ public enum ResponseMessage {
     CREATE_TAXI_SUCCESS(201, "택시 등록에 성공하였습니다."),
     UPDATE_REGION_SUCCESS(200, "지역 변경에 성공하였습니다."),
     UPDATE_GRADE_SUCCESS(200, "등급 변경에 성공하였습니다."),
+    DELETE_TAXI_SUCCESS(200, "택시 등록을 성공적으로 삭제하였습니다."),
 
     //==FAIL==//
     NOT_TAXI_MEMBER(401, "택시 권한의 회원이 아닙니다."),
