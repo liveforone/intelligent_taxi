@@ -4,7 +4,7 @@ public final class TaxiUrl {
 
     //==query==//
     public static final String MY_PAGE = "/taxi/my-page";
-    public static final String TAXI_INFO = "/taxi/info/{id}";
+    public static final String TAXI_INFO = "/provide/taxi/info/{id}";
 
     //==command==//
     public static final String CREATE = "/create/taxi";
