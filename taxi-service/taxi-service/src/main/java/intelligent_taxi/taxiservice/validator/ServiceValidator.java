@@ -14,7 +14,7 @@ public class ServiceValidator {
 
     private final TaxiRepository taxiRepository;
 
-    public Taxi validateUsernameAndId(String username, Long id) {
+    public Taxi validateTaxiAndUsername(String username, Long id) {
         Taxi taxi = taxiRepository.findOneById(id);
 
         if (CommonUtils.isNull(taxi)) {
