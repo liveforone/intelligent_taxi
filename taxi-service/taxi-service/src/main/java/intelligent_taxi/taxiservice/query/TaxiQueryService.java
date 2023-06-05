@@ -17,4 +17,8 @@ public class TaxiQueryService {
     public TaxiResponse getTaxiByUsername(String username) {
         return TaxiMapper.entityToDto(taxiRepository.findOneByUsername(username));
     }
+
+    public TaxiResponse getTaxiById(Long id) {
+        return TaxiMapper.entityToDto(taxiRepository.findOneById(id));
+    }
 }
