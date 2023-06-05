@@ -76,4 +76,15 @@ public class TaxiController {
 
         return RestResponse.updateGradeSuccess();
     }
+
+    @DeleteMapping(DELETE_TAXI)
+    public ResponseEntity<?> deleteTaxi(
+            @PathVariable(TaxiParam.ID) Long id,
+            HttpServletRequest request
+    ) {
+        taxiCommandService.deleteOneById(id, authenticationInfo.getUsername(request));
+        log.info(ControllerLog.DELETE_TAXI_SUCCESS.getLog() + id);
+
+        return RestResponse.deleteTaxiSuccess();
+    }
 }
