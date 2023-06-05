@@ -41,6 +41,14 @@ public class TaxiController {
         return ResponseEntity.ok(taxi);
     }
 
+    @GetMapping(TAXI_INFO)
+    public ResponseEntity<?> taxiInfo(
+            @PathVariable(TaxiParam.ID) Long id
+    ) {
+        TaxiResponse taxi = taxiQueryService.getTaxiById(id);
+        return ResponseEntity.ok(taxi);
+    }
+
     @PostMapping(CREATE)
     public ResponseEntity<?> createTaxi(
             @RequestBody @Valid TaxiRequest requestDto,
