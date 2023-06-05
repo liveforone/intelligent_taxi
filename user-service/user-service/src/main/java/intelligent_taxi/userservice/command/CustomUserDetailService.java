@@ -24,7 +24,7 @@ public class CustomUserDetailService implements UserDetailsService {
     }
 
     private UserDetails createUserDetails(Member member) {
-        if (Objects.equals(member.getAuth(), Role.TAXI.getAuth())) {
+        if (Objects.equals(member.getAuth(), Role.TAXI)) {
             String TAXI_ROLE = "TAXI";
             return User.builder()
                     .username(member.getUsername())
