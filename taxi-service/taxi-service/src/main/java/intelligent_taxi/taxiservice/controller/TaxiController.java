@@ -6,8 +6,10 @@ import intelligent_taxi.taxiservice.controller.constant.ControllerLog;
 import intelligent_taxi.taxiservice.controller.constant.TaxiParam;
 import intelligent_taxi.taxiservice.controller.restResponse.RestResponse;
 import intelligent_taxi.taxiservice.dto.TaxiRequest;
+import intelligent_taxi.taxiservice.dto.TaxiResponse;
 import intelligent_taxi.taxiservice.dto.UpdateGradeRequest;
 import intelligent_taxi.taxiservice.dto.UpdateRegionReqeust;
+import intelligent_taxi.taxiservice.query.TaxiQueryService;
 import intelligent_taxi.taxiservice.validator.ControllerValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -25,8 +27,19 @@ import static intelligent_taxi.taxiservice.controller.constant.TaxiUrl.*;
 public class TaxiController {
 
     private final TaxiCommandService taxiCommandService;
+    private final TaxiQueryService taxiQueryService;
     private final ControllerValidator controllerValidator;
     private final AuthenticationInfo authenticationInfo;
+
+    @GetMapping(MY_PAGE)
+    public ResponseEntity<?> myTaxiPage(
+            HttpServletRequest request
+    ) {
+        controllerValidator.validateAuth(authenticationInfo.getAuth(request));
+
+        TaxiResponse taxi = taxiQueryService.getTaxiByUsername(authenticationInfo.getUsername(request));
+        return ResponseEntity.ok(taxi);
+    }
 
     @PostMapping(CREATE)
     public ResponseEntity<?> createTaxi(
