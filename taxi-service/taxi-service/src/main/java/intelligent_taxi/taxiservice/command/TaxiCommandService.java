@@ -24,17 +24,22 @@ public class TaxiCommandService {
     }
 
     public void updateRegion(UpdateRegionReqeust requestDto, String username, Long id) {
-        Taxi taxi = serviceValidator.validateUsernameAndId(username, id);
+        Taxi taxi = serviceValidator.validateTaxiAndUsername(username, id);
         taxi.updateRegion(requestDto.getRegion());
     }
 
     public void updateGrade(UpdateGradeRequest requestDto, String username, Long id) {
-        Taxi taxi = serviceValidator.validateUsernameAndId(username, id);
+        Taxi taxi = serviceValidator.validateTaxiAndUsername(username, id);
         taxi.updateGrade(requestDto.getTaxiGrade());
     }
 
     public void deleteOneByUsername(String username) {
         Taxi taxi = serviceValidator.validateDeleteOneByUsername(username);
+        taxiRepository.delete(taxi);
+    }
+
+    public void deleteOneById(Long id, String username) {
+        Taxi taxi = serviceValidator.validateTaxiAndUsername(username, id);
         taxiRepository.delete(taxi);
     }
 }
