@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UpdateRegionReqeust {
+public class UpdateRegionRequest {
 
     @NotBlank(message = "지역을 선택하세요.")
     private String region;

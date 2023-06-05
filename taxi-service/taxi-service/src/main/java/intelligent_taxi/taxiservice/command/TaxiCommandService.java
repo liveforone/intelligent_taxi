@@ -3,7 +3,7 @@ package intelligent_taxi.taxiservice.command;
 import intelligent_taxi.taxiservice.domain.Taxi;
 import intelligent_taxi.taxiservice.dto.TaxiRequest;
 import intelligent_taxi.taxiservice.dto.UpdateGradeRequest;
-import intelligent_taxi.taxiservice.dto.UpdateRegionReqeust;
+import intelligent_taxi.taxiservice.dto.UpdateRegionRequest;
 import intelligent_taxi.taxiservice.repository.TaxiRepository;
 import intelligent_taxi.taxiservice.validator.ServiceValidator;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class TaxiCommandService {
         return taxiRepository.save(taxi).getId();
     }
 
-    public void updateRegion(UpdateRegionReqeust requestDto, String username, Long id) {
+    public void updateRegion(UpdateRegionRequest requestDto, String username, Long id) {
         Taxi taxi = serviceValidator.validateTaxiAndUsername(username, id);
         taxi.updateRegion(requestDto.getRegion());
     }

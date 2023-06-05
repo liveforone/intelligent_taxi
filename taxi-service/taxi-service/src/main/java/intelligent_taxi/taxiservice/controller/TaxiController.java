@@ -8,7 +8,7 @@ import intelligent_taxi.taxiservice.controller.restResponse.RestResponse;
 import intelligent_taxi.taxiservice.dto.TaxiRequest;
 import intelligent_taxi.taxiservice.dto.TaxiResponse;
 import intelligent_taxi.taxiservice.dto.UpdateGradeRequest;
-import intelligent_taxi.taxiservice.dto.UpdateRegionReqeust;
+import intelligent_taxi.taxiservice.dto.UpdateRegionRequest;
 import intelligent_taxi.taxiservice.query.TaxiQueryService;
 import intelligent_taxi.taxiservice.validator.ControllerValidator;
 import jakarta.servlet.http.HttpServletRequest;
@@ -67,7 +67,7 @@ public class TaxiController {
     @PutMapping(UPDATE_REGION)
     public ResponseEntity<?> updateRegion(
             @PathVariable(TaxiParam.ID) Long id,
-            @RequestBody @Valid UpdateRegionReqeust requestDto,
+            @RequestBody @Valid UpdateRegionRequest requestDto,
             BindingResult bindingResult,
             HttpServletRequest request
     ) {
