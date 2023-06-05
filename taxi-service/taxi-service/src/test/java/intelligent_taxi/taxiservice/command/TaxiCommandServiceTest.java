@@ -40,7 +40,7 @@ class TaxiCommandServiceTest {
     void createTaxiTest() {
         //given
         String username = "dflsjfoefneowfoaefoijf";
-        String region = "seoul";
+        String region = "서울";
         String taxiGrade = "NORMAL";
         String licenseNum = "00아0000";
         String phoneNum = "01000000000";
@@ -65,7 +65,7 @@ class TaxiCommandServiceTest {
     void updateRegionTest() {
         //given
         String username = "dflsjfoefneowfoaefoijf";
-        String region = "seoul";
+        String region = "인천";
         String taxiGrade = "NORMAL";
         String licenseNum = "00바0000";
         String phoneNum = "01000000000";
@@ -74,7 +74,7 @@ class TaxiCommandServiceTest {
         em.clear();
 
         //when
-        String updatedRegion = "GYEONGGI";
+        String updatedRegion = "경기";
         UpdateRegionRequest request = new UpdateRegionRequest();
         request.setRegion(updatedRegion);
         taxiCommandService.updateRegion(request, username, taxiId);
@@ -91,7 +91,7 @@ class TaxiCommandServiceTest {
     void updateGradeTest() {
         //given
         String username = "dflsjfoefneowfoaefoijf";
-        String region = "seoul";
+        String region = "강원";
         String taxiGrade = "NORMAL";
         String licenseNum = "00사0000";
         String phoneNum = "01000000000";
@@ -115,6 +115,24 @@ class TaxiCommandServiceTest {
     @Test
     @Transactional
     void deleteOneByUsernameTest() {
+        //given
+        String username = "dflsjfoefneowfoaefoijf";
+        String region = "경북";
+        String taxiGrade = "NORMAL";
+        String licenseNum = "00자0000";
+        String phoneNum = "01000000000";
+        Long taxiId = createTaxi(username, region, taxiGrade, licenseNum, phoneNum);
+        em.flush();
+        em.clear();
+
+        //when
+        taxiCommandService.deleteOneByUsername(username);
+        em.flush();
+        em.clear();
+
+        //then
+        assertThat(taxiQueryService.getTaxiById(taxiId).getId())
+                .isNull();
     }
 
     @Test
