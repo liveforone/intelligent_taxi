@@ -9,4 +9,6 @@ public final class Topic {
     public static final String REQUEST_CALCULATE = "request-calculate";
 
     //==consumer==//
+    public static final String ORDER_FAIL_ROLLBACK_DISPATCH = "order-fail-rollback-dispatch";
+    public static final String CALCULATE_FAIL_ROLLBACK_DISPATCH = "calculate-fail-rollback-dispatch";
 }
