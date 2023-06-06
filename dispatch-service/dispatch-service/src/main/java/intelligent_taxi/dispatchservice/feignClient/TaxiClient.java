@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import static intelligent_taxi.dispatchservice.feignClient.constant.TaxiUrl.*;
 
 @FeignClient(name = BASE)
-public interface TaxiFeignService {
+public interface TaxiClient {
 
     @GetMapping(TAXI_INFO)
     TaxiResponse getTaxiInfo(@PathVariable(TaxiParam.ID) Long taxiId);
