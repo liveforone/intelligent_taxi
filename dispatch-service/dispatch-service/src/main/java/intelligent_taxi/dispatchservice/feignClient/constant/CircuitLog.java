@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum CircuitLog {
 
-    TIMETABLE_CIRCUIT_LOG("dispatch-circuit");
+    DISPATCH_CIRCUIT_LOG("dispatch-circuit");
 
     private final String value;
 }
