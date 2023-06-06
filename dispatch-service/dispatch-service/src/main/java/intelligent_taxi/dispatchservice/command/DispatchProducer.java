@@ -2,6 +2,7 @@ package intelligent_taxi.dispatchservice.command;
 
 import com.google.gson.Gson;
 import intelligent_taxi.dispatchservice.async.AsyncConstant;
+import intelligent_taxi.dispatchservice.dto.order.RequestOrder;
 import intelligent_taxi.dispatchservice.kafka.KafkaLog;
 import intelligent_taxi.dispatchservice.kafka.Topic;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,12 @@ public class DispatchProducer {
     Gson gson = new Gson();
 
     @Async(AsyncConstant.commandAsync)
-    public void requestOrder(Long dispatchId) {
-        String jsonOrder = gson.toJson(dispatchId);
+    public void requestOrder(Long dispatchId, long price) {
+        RequestOrder requestOrder = RequestOrder.builder()
+                .dispatchId(dispatchId)
+                .price(price)
+                .build();
+        String jsonOrder = gson.toJson(requestOrder);
         String topic = Topic.REQUEST_ORDER;
 
         kafkaTemplate.send(topic, jsonOrder);
