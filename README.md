@@ -36,6 +36,7 @@
 # 3. 서비스별 문서
 * [회원 서비스](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/README_USER.md)
 * [택시 서비스](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/README_TAXI.md)
+* [배차 서비스](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/README_DISPATCH.md)
 
 # 4. 프로젝트 설계 문서
 * [수익 모델](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/PROFIT.md)
