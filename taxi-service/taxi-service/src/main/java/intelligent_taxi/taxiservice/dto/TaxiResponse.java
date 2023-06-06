@@ -1,6 +1,5 @@
 package intelligent_taxi.taxiservice.dto;
 
-import intelligent_taxi.taxiservice.domain.Region;
 import intelligent_taxi.taxiservice.domain.TaxiGrade;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
