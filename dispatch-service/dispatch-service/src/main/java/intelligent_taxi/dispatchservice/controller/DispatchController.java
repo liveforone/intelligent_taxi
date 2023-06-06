@@ -1,6 +1,7 @@
 package intelligent_taxi.dispatchservice.controller;
 
 import intelligent_taxi.dispatchservice.authentication.AuthenticationInfo;
+import intelligent_taxi.dispatchservice.dto.dispatch.DispatchResponse;
 import intelligent_taxi.dispatchservice.query.DispatchQueryService;
 import intelligent_taxi.dispatchservice.validator.ControllerValidator;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +26,9 @@ public class DispatchController {
     public ResponseEntity<?> dispatchMemberHome(
             HttpServletRequest request
     ) {
+        controllerValidator.validateAuthIsMember(authenticationInfo.getAuth(request));
 
+        DispatchResponse dispatch = dispatchQueryService.getCurrentDispatchByUsername(authenticationInfo.getUsername(request));
+        return ResponseEntity.ok(dispatch);
     }
 }
