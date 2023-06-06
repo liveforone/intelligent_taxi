@@ -28,7 +28,31 @@
 ```
 /user/withdraw
 ```
-## 회원정보
+### 회원정보
 ```
 /user/my-info
+```
+
+## 택시 정보
+### 택시 등록
+```
+/taxi/create
+```
+### 택시 페이지
+```
+/taxi/info
+```
+### 택시 등록 해제
+```
+/taxi/delete
+```
+
+## 배차
+### 배차 등록
+```
+/dispatch/create
+```
+### 배차 페이지
+```
+/dispatch/info
 ```
