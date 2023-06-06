@@ -34,7 +34,7 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.springframework.web: DEBUG
-    #feign: DEBUG
+    intelligent_taxi.dispatchservice.feignClient.TaxiClient: DEBUG
 
 feign:
   client:
