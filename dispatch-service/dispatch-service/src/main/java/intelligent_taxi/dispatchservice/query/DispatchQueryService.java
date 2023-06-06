@@ -14,7 +14,9 @@ public class DispatchQueryService {
 
     private final DispatchRepository dispatchRepository;
 
-
+    public DispatchResponse getDispatchByUsername(String username) {
+        return DispatchMapper.entityToDto(dispatchRepository.findOneByUsername(username));
+    }
 
     public DispatchResponse getDispatchById(Long id) {
         return DispatchMapper.entityToDto(dispatchRepository.findOneById(id));
