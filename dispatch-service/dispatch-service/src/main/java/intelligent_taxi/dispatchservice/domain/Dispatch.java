@@ -1,5 +1,6 @@
 package intelligent_taxi.dispatchservice.domain;
 
+import intelligent_taxi.dispatchservice.converter.DispatchStateConverter;
 import intelligent_taxi.dispatchservice.domain.policy.PriceCalculator;
 import intelligent_taxi.dispatchservice.dto.dispatch.DispatchRequest;
 import jakarta.persistence.*;
@@ -39,6 +40,9 @@ public class Dispatch {
 
     private long price;
 
+    @Convert(converter = DispatchStateConverter.class)
+    private DispatchState dispatchState;
+
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdDate;
@@ -53,6 +57,7 @@ public class Dispatch {
         this.destinationLongitude = destinationLongitude;
         this.username = username;
         this.price = price;
+        this.dispatchState = DispatchState.READY;
     }
 
     public static Dispatch create(DispatchRequest requestDto, String username) {
@@ -64,5 +69,9 @@ public class Dispatch {
                 username,
                 PriceCalculator.calculatePrice(requestDto)
         );
+    }
+
+    public void finishDispatch() {
+        this.dispatchState = DispatchState.FINISH;
     }
 }
