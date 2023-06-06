@@ -13,17 +13,19 @@ public class DispatchRepositoryImpl implements DispatchCustomRepository {
     private final JPAQueryFactory queryFactory;
     QDispatch dispatch = QDispatch.dispatch;
 
-    public Dispatch findOneByUsername(String username) {
-        return queryFactory
-                .selectFrom(dispatch)
-                .where(dispatch.username.eq(username))
-                .fetchOne();
-    }
-
     public Dispatch findOneById(Long id) {
         return queryFactory
                 .selectFrom(dispatch)
                 .where(dispatch.id.eq(id))
+                .fetchOne();
+    }
+
+    public Dispatch findCurrentOneByUsername(String username) {
+        return queryFactory
+                .selectFrom(dispatch)
+                .where(dispatch.username.eq(username))
+                .orderBy(dispatch.id.desc())
+                .limit(1)
                 .fetchOne();
     }
 }
