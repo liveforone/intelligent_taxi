@@ -18,13 +18,12 @@ public class DispatchProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
     Gson gson = new Gson();
 
-    /*
     @Async(AsyncConstant.commandAsync)
-    public void removeRecommend(Long shopId) {
-        String jsonOrder = gson.toJson(shopId);
-        String topic = Topic;
+    public void requestOrder(Long dispatchId) {
+        String jsonOrder = gson.toJson(dispatchId);
+        String topic = Topic.REQUEST_ORDER;
+
         kafkaTemplate.send(topic, jsonOrder);
         log.info(KafkaLog.KAFKA_SEND_LOG.getValue() + topic);
     }
-     */
 }
