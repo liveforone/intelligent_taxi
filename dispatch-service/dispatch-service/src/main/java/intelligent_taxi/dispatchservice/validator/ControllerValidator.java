@@ -7,9 +7,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ControllerValidator {
+
     public void validateAuthIsMember(String auth) {
         if (!auth.equals(Role.MEMBER.getAuth())) {
             throw new DispatchCustomException(ResponseMessage.AUTH_IS_NOT_MEMBER);
+        }
+    }
+
+    public void validateAuthIsTaxi(String auth) {
+        if (!auth.equals(Role.TAXI.getAuth())) {
+            throw new DispatchCustomException(ResponseMessage.AUTH_IS_NOT_TAXI);
         }
     }
 }
