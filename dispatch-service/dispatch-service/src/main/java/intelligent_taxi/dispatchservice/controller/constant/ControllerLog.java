@@ -7,7 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ControllerLog {
 
-    CREATE_DISPATCH_SUCCESS("Create Dispatch Success");
+    CREATE_DISPATCH_SUCCESS("Create Dispatch Success"),
+    REMOVE_DISPATCH_SUCCESS("Remove Dispatch Success | ID : ");
 
     private final String log;
 }
