@@ -22,9 +22,10 @@ public class DispatchProducer {
     Gson gson = new Gson();
 
     @Async(AsyncConstant.commandAsync)
-    public void requestOrder(Long dispatchId, long price) {
+    public void requestOrder(Long dispatchId, Long taxiId, long price) {
         RequestOrder requestOrder = RequestOrder.builder()
                 .dispatchId(dispatchId)
+                .taxiId(taxiId)
                 .price(price)
                 .build();
         String jsonOrder = gson.toJson(requestOrder);
@@ -35,9 +36,10 @@ public class DispatchProducer {
     }
 
     @Async(AsyncConstant.commandAsync)
-    public void requestCalculate(Long dispatchId, long price, long distance) {
+    public void requestCalculate(Long dispatchId, Long taxiId, long price, long distance) {
         RequestCalculate requestCalculate = RequestCalculate.builder()
                 .dispatchId(dispatchId)
+                .taxiId(taxiId)
                 .price(price)
                 .distance(distance)
                 .build();

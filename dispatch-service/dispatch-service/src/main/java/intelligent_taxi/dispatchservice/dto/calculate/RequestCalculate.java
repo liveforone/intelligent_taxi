@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RequestCalculate {
     private Long dispatchId;
+    private Long taxiId;
     private long price;
     private double distance;
 }
