@@ -25,4 +25,9 @@ public class DispatchCommandService {
         Dispatch dispatch = serviceValidator.validateRemoveDispatch(id, username);
         dispatchRepository.delete(dispatch);
     }
+
+    public void rollbackDispatch(Long id) {
+        Dispatch dispatch = dispatchRepository.findOneById(id);
+        dispatchRepository.delete(dispatch);
+    }
 }
