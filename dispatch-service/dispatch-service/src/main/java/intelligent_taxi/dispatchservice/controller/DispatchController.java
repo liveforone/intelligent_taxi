@@ -7,6 +7,7 @@ import intelligent_taxi.dispatchservice.controller.constant.DispatchParam;
 import intelligent_taxi.dispatchservice.controller.restResponse.RestResponse;
 import intelligent_taxi.dispatchservice.dto.dispatch.DispatchRequest;
 import intelligent_taxi.dispatchservice.dto.dispatch.DispatchResponse;
+import intelligent_taxi.dispatchservice.dto.dispatch.RequestDispatch;
 import intelligent_taxi.dispatchservice.query.DispatchQueryService;
 import intelligent_taxi.dispatchservice.validator.ControllerValidator;
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,9 +61,23 @@ public class DispatchController {
             HttpServletRequest request
     ) {
         dispatchCommandService.removeDispatch(id, authenticationInfo.getUsername(request));
+        log.info(ControllerLog.REMOVE_DISPATCH_SUCCESS.getLog() + id);
 
         return RestResponse.removeDispatchSuccess();
     }
-    
-    //배차요청, auth check = taxi
+
+    @PostMapping(REQUEST_DISPATCH)
+    public ResponseEntity<?> requestDispatch(
+            @RequestBody @Valid RequestDispatch requestDto,
+            BindingResult bindingResult,
+            HttpServletRequest request
+    ) {
+        controllerValidator.validateBinding(bindingResult);
+        controllerValidator.validateAuthIsTaxi(authenticationInfo.getAuth(request));
+
+        dispatchCommandService.dispatch(requestDto, authenticationInfo.getUsername(request));
+        log.info(ControllerLog.REQUEST_DISPATCH_SUCCESS.getLog());
+
+        return RestResponse.dispatchSuccess();
+    }
 }
