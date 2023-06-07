@@ -3,6 +3,7 @@ package intelligent_taxi.dispatchservice.validator;
 import intelligent_taxi.dispatchservice.controller.restResponse.ResponseMessage;
 import intelligent_taxi.dispatchservice.domain.Dispatch;
 import intelligent_taxi.dispatchservice.domain.DispatchState;
+import intelligent_taxi.dispatchservice.dto.dispatch.RequestDispatch;
 import intelligent_taxi.dispatchservice.exception.DispatchCustomException;
 import intelligent_taxi.dispatchservice.repository.DispatchRepository;
 import intelligent_taxi.dispatchservice.utility.CommonUtils;
@@ -28,6 +29,19 @@ public class ServiceValidator {
 
         if (dispatch.getDispatchState() == DispatchState.FINISH) {
             throw new DispatchCustomException(ResponseMessage.DISPATCH_IS_ALREADY_FINISH);
+        }
+
+        return dispatch;
+    }
+
+    public Dispatch validateDispatch(RequestDispatch requestDto) {
+        Dispatch dispatch = dispatchRepository.findOneWithinDistance(
+                requestDto.getPresentLatitude(),
+                requestDto.getPresentLongitude()
+        );
+
+        if (CommonUtils.isNull(dispatch)) {
+            throw new DispatchCustomException(ResponseMessage.DISPATCH_IS_NULL);
         }
 
         return dispatch;
