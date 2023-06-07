@@ -14,7 +14,10 @@ public class PayClientWrapper {
     private final PayClient payClient;
     private final CircuitBreakerFactory<?, ?> circuitBreakerFactory;
 
-    public boolean checkBalance(CheckBalanceRequest requestDto) {
+    public boolean checkBalance(String bankbookNum, long price) {
+        CheckBalanceRequest requestDto = new CheckBalanceRequest();
+        requestDto.setBankbookNum(bankbookNum);
+        requestDto.setPrice(price);
         return circuitBreakerFactory
                 .create(CircuitLog.DISPATCH_CIRCUIT_LOG.getValue())
                 .run(
