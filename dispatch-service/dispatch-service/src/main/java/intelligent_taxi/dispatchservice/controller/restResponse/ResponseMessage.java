@@ -13,6 +13,7 @@ public enum ResponseMessage {
     DISPATCH_SUCCESS(201, "배차를 성공하였습니다."),
 
     //==fail==//
+    CHECK_BALANCE_FAIL(400, "결제 승인에 실패하였습니다."),
     AUTH_IS_NOT_MEMBER(401, "일반회원이 아닙니다."),
     AUTH_IS_NOT_TAXI(401, "택시회원이 아닙니다."),
     DISPATCH_IS_NULL(404, "배차가 존재하지 않습니다."),
