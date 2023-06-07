@@ -17,22 +17,23 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DispatchConsumer {
 
-    //service 호출
+    private final DispatchCommandService dispatchCommandService;
+    private final DispatchProducer dispatchProducer;
     ObjectMapper objectMapper = new ObjectMapper();
 
-    /*
-    @KafkaListener(topics = Topic)
+    @KafkaListener(topics = Topic.ORDER_FAIL_ROLLBACK_DISPATCH)
     @Async(AsyncConstant.commandAsync)
-    public void increaseShopIsGood(String kafkaMessage) throws JsonProcessingException {
+    public void orderFailRollbackDispatch(String kafkaMessage) throws JsonProcessingException {
         log.info(KafkaLog.KAFKA_RECEIVE_LOG.getValue() + kafkaMessage);
 
-        Long shopId = objectMapper.readValue(kafkaMessage, Long.class);
+        Long dispatchId = objectMapper.readValue(kafkaMessage, Long.class);
 
-        if (CommonUtils.isNull(shopId)) {
+        if (CommonUtils.isNull(dispatchId)) {
             log.info(KafkaLog.KAFKA_NULL_LOG.getValue());
         } else {
-            log.info(KafkaLog.INCREASE_SHOP_GOOD.getValue() + shopId);
+            dispatchCommandService.rollbackDispatch(dispatchId);
+            dispatchProducer.orderFailRollbackCalculate(dispatchId);
+            log.info(KafkaLog.ORDER_FAIL_ROLLBACK_DISPATCH.getValue() + dispatchId);
         }
     }
-     */
 }
