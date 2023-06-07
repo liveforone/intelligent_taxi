@@ -56,4 +56,13 @@ public class DispatchProducer {
         kafkaTemplate.send(topic, jsonOrder);
         log.info(KafkaLog.KAFKA_SEND_LOG.getValue() + topic);
     }
+
+    @Async(AsyncConstant.commandAsync)
+    public void calculateFailRollbackOrder(Long dispatchId) {
+        String jsonOrder = gson.toJson(dispatchId);
+        String topic = CALCULATE_FAIL_ROLLBACK_ORDER;
+
+        kafkaTemplate.send(topic, jsonOrder);
+        log.info(KafkaLog.KAFKA_SEND_LOG.getValue() + topic);
+    }
 }
