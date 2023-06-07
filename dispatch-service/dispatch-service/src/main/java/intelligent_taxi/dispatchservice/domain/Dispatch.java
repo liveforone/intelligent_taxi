@@ -1,6 +1,7 @@
 package intelligent_taxi.dispatchservice.domain;
 
 import intelligent_taxi.dispatchservice.converter.DispatchStateConverter;
+import intelligent_taxi.dispatchservice.distanceAlgorithm.DistanceCalculator;
 import intelligent_taxi.dispatchservice.domain.policy.PriceCalculator;
 import intelligent_taxi.dispatchservice.dto.dispatch.DispatchRequest;
 import jakarta.persistence.*;
@@ -36,6 +37,9 @@ public class Dispatch {
     private Double destinationLongitude;
 
     @Column(nullable = false)
+    private Double distance;
+
+    @Column(nullable = false)
     private String username;
 
     private long price;
@@ -55,6 +59,7 @@ public class Dispatch {
         this.presentLongitude = presentLongitude;
         this.destinationLatitude = destinationLatitude;
         this.destinationLongitude = destinationLongitude;
+        this.distance = DistanceCalculator.calculateDistance(presentLatitude, presentLongitude, destinationLatitude, destinationLongitude);
         this.username = username;
         this.price = price;
         this.dispatchState = DispatchState.READY;
