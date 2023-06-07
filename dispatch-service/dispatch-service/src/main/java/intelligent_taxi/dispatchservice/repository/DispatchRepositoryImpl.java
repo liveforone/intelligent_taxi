@@ -17,6 +17,11 @@ public class DispatchRepositoryImpl implements DispatchCustomRepository {
     private final JPAQueryFactory queryFactory;
     QDispatch dispatch = QDispatch.dispatch;
 
+    private static final double ONE_KM = 1.0;
+    private static final double THREE_KM = 3.0;
+    private static final double FIVE_KM = 5.0;
+    private static final double R = 6371;
+
     public Dispatch findOneById(Long id) {
         return queryFactory
                 .selectFrom(dispatch)
@@ -33,13 +38,16 @@ public class DispatchRepositoryImpl implements DispatchCustomRepository {
                 .fetchOne();
     }
 
+
     public Dispatch findOneWithinDistance(Double latitude, Double longitude) {
+        NumberExpression<Double> calculatedDistance = calculateDistance(latitude, longitude, dispatch.presentLatitude, dispatch.presentLongitude);
+
         return queryFactory
                 .selectFrom(dispatch)
-                .where(dispatch.presentLatitude.between(latitude - 0.009, latitude + 0.009)
-                        .and(dispatch.presentLongitude.between(longitude - 0.009, longitude + 0.009))
-                        .or(calculateDistance(latitude, longitude, dispatch.presentLatitude, dispatch.presentLongitude).loe(3.0))
-                        .or(calculateDistance(latitude, longitude, dispatch.presentLatitude, dispatch.presentLongitude).loe(5.0))
+                .where(
+                        calculatedDistance.loe(ONE_KM)
+                        .or(calculatedDistance.loe(THREE_KM))
+                        .or(calculatedDistance.loe(FIVE_KM))
                 )
                 .limit(1)
                 .fetchOne();
@@ -58,6 +66,6 @@ public class DispatchRepositoryImpl implements DispatchCustomRepository {
         NumberExpression<Double> a = sin(lat1Num).multiply(sin(lat2Rad))
                 .add(cos(lat1Num).multiply(cos(lat2Rad)).multiply(cos(lonDiff)));
 
-        return acos(a).multiply(6371.0);
+        return acos(a).multiply(R);
     }
 }
