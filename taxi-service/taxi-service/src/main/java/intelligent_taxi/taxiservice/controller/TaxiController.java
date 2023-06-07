@@ -41,11 +41,19 @@ public class TaxiController {
         return ResponseEntity.ok(taxi);
     }
 
-    @GetMapping(TAXI_INFO)
-    public ResponseEntity<?> taxiInfo(
+    @GetMapping(TAXI_INFO_BY_ID)
+    public ResponseEntity<?> provideTaxiInfoId(
             @PathVariable(TaxiParam.ID) Long id
     ) {
         TaxiResponse taxi = taxiQueryService.getTaxiById(id);
+        return ResponseEntity.ok(taxi);
+    }
+
+    @GetMapping(TAXI_INFO_BY_USERNAME)
+    public ResponseEntity<?> provideTaxiInfoUsername(
+            @PathVariable(TaxiParam.USERNAME) String username
+    ) {
+        TaxiResponse taxi = taxiQueryService.getTaxiByUsername(username);
         return ResponseEntity.ok(taxi);
     }
 
