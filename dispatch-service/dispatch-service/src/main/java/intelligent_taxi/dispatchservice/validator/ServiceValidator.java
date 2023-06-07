@@ -16,6 +16,12 @@ public class ServiceValidator {
 
     private final DispatchRepository dispatchRepository;
 
+    public void validateCheckBalance(Boolean checkBalance) {
+        if (!checkBalance) {
+            throw new DispatchCustomException(ResponseMessage.CHECK_BALANCE_FAIL);
+        }
+    }
+
     public Dispatch validateRemoveDispatch(Long id, String username) {
         Dispatch dispatch = dispatchRepository.findOneById(id);
 
