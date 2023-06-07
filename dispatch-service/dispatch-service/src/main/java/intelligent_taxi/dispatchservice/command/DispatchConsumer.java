@@ -36,4 +36,20 @@ public class DispatchConsumer {
             log.info(KafkaLog.ORDER_FAIL_ROLLBACK_DISPATCH.getValue() + dispatchId);
         }
     }
+
+    @KafkaListener(topics = Topic.CALCULATE_FAIL_ROLLBACK_DISPATCH)
+    @Async(AsyncConstant.commandAsync)
+    public void calculateFailRollbackDispatch(String kafkaMessage) throws JsonProcessingException {
+        log.info(KafkaLog.KAFKA_RECEIVE_LOG.getValue() + kafkaMessage);
+
+        Long dispatchId = objectMapper.readValue(kafkaMessage, Long.class);
+
+        if (CommonUtils.isNull(dispatchId)) {
+            log.info(KafkaLog.KAFKA_NULL_LOG.getValue());
+        } else {
+            dispatchCommandService.rollbackDispatch(dispatchId);
+            dispatchProducer.calculateFailRollbackOrder(dispatchId);
+            log.info(KafkaLog.ORDER_FAIL_ROLLBACK_DISPATCH.getValue() + dispatchId);
+        }
+    }
 }
