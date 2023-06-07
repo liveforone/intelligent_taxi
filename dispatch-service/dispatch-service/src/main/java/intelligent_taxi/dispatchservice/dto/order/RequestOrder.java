@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class RequestOrder {
 
     private Long dispatchId;
+    private Long taxiId;
     private long price;
 }
