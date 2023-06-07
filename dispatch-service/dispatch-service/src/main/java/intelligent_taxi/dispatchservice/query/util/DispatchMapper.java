@@ -16,6 +16,7 @@ public class DispatchMapper {
                 .presentLongitude(dispatch.getPresentLongitude())
                 .destinationLatitude(dispatch.getDestinationLatitude())
                 .destinationLongitude(dispatch.getDestinationLongitude())
+                .distance(dispatch.getDistance())
                 .price(dispatch.getPrice())
                 .dispatchState(dispatch.getDispatchState())
                 .createdDate(dispatch.getCreatedDate())

@@ -19,6 +19,7 @@ public class DispatchResponse {
     private Double presentLongitude;
     private Double destinationLatitude;
     private Double destinationLongitude;
+    private Double distance;
     private long price;
     private DispatchState dispatchState;
     private LocalDateTime createdDate;
