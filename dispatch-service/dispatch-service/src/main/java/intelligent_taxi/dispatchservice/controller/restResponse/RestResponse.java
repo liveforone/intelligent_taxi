@@ -9,4 +9,8 @@ public class RestResponse {
                 .status(ResponseMessage.DISPATCH_SAVE_SUCCESS.getStatus())
                 .body(ResponseMessage.DISPATCH_SAVE_SUCCESS.getValue());
     }
+
+    public static ResponseEntity<?> removeDispatchSuccess() {
+        return ResponseEntity.ok(ResponseMessage.REMOVE_DISPATCH_SUCCESS.getValue());
+    }
 }
