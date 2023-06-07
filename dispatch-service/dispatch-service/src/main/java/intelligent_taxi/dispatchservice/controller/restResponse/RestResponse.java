@@ -13,4 +13,10 @@ public class RestResponse {
     public static ResponseEntity<?> removeDispatchSuccess() {
         return ResponseEntity.ok(ResponseMessage.REMOVE_DISPATCH_SUCCESS.getValue());
     }
+
+    public static ResponseEntity<?> dispatchSuccess() {
+        return ResponseEntity
+                .status(ResponseMessage.DISPATCH_SUCCESS.getStatus())
+                .body(ResponseMessage.DISPATCH_SUCCESS.getValue());
+    }
 }
