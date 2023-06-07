@@ -36,12 +36,12 @@ public class DispatchProducer {
     }
 
     @Async(AsyncConstant.commandAsync)
-    public void requestCalculate(Long dispatchId, Long taxiId, long price, long distance) {
+    public void requestCalculate(Long dispatchId, Long taxiId, double distance, long price) {
         RequestCalculate requestCalculate = RequestCalculate.builder()
                 .dispatchId(dispatchId)
                 .taxiId(taxiId)
-                .price(price)
                 .distance(distance)
+                .price(price)
                 .build();
         String jsonOrder = gson.toJson(requestCalculate);
         String topic = REQUEST_CALCULATE;
