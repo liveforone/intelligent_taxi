@@ -26,7 +26,8 @@
 ```
 ### 외부 API
 ```
-[GET] /provide/taxi/info/{id} : 택시 정보 조회 외부 리턴 api
+[GET] /provide/taxi/info/id/{id} : 택시 정보 조회 외부 리턴 api
+[GET] /provide/taxi/info/username/{username} : 택시 정보 조회 외부 리턴 api
 ```
 
 ## Json body 예시
