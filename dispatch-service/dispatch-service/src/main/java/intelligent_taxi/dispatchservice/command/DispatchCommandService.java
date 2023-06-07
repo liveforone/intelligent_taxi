@@ -22,7 +22,7 @@ public class DispatchCommandService {
     }
 
     public void removeDispatch(Long id, String username) {
-        Dispatch dispatch = serviceValidator.validateUsername(id, username);
+        Dispatch dispatch = serviceValidator.validateRemoveDispatch(id, username);
         dispatchRepository.delete(dispatch);
     }
 }

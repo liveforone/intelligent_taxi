@@ -2,6 +2,7 @@ package intelligent_taxi.dispatchservice.validator;
 
 import intelligent_taxi.dispatchservice.controller.restResponse.ResponseMessage;
 import intelligent_taxi.dispatchservice.domain.Dispatch;
+import intelligent_taxi.dispatchservice.domain.DispatchState;
 import intelligent_taxi.dispatchservice.exception.DispatchCustomException;
 import intelligent_taxi.dispatchservice.repository.DispatchRepository;
 import intelligent_taxi.dispatchservice.utility.CommonUtils;
@@ -14,7 +15,7 @@ public class ServiceValidator {
 
     private final DispatchRepository dispatchRepository;
 
-    public Dispatch validateUsername(Long id, String username) {
+    public Dispatch validateRemoveDispatch(Long id, String username) {
         Dispatch dispatch = dispatchRepository.findOneById(id);
 
         if (CommonUtils.isNull(dispatch)) {
@@ -23,6 +24,10 @@ public class ServiceValidator {
 
         if (!username.equals(dispatch.getUsername())) {
             throw new DispatchCustomException(ResponseMessage.NOT_MATCH_USERNAME);
+        }
+
+        if (dispatch.getDispatchState() == DispatchState.FINISH) {
+            throw new DispatchCustomException(ResponseMessage.DISPATCH_IS_ALREADY_FINISH);
         }
 
         return dispatch;
