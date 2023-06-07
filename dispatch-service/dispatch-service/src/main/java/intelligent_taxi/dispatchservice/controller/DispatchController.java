@@ -3,6 +3,7 @@ package intelligent_taxi.dispatchservice.controller;
 import intelligent_taxi.dispatchservice.authentication.AuthenticationInfo;
 import intelligent_taxi.dispatchservice.command.DispatchCommandService;
 import intelligent_taxi.dispatchservice.controller.constant.ControllerLog;
+import intelligent_taxi.dispatchservice.controller.constant.DispatchParam;
 import intelligent_taxi.dispatchservice.controller.restResponse.RestResponse;
 import intelligent_taxi.dispatchservice.dto.dispatch.DispatchRequest;
 import intelligent_taxi.dispatchservice.dto.dispatch.DispatchResponse;
@@ -14,10 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static intelligent_taxi.dispatchservice.controller.constant.DispatchUrl.*;
 
@@ -55,8 +53,16 @@ public class DispatchController {
 
         return RestResponse.createDispatchSuccess();
     }
-    
-    //일반회원이 본인이 올린 배차 취소요청, state가 ready라면
+
+    @DeleteMapping(REMOVE_DISPATCH)
+    public ResponseEntity<?> removeDispatch(
+            @PathVariable(DispatchParam.ID) Long id,
+            HttpServletRequest request
+    ) {
+        dispatchCommandService.removeDispatch(id, authenticationInfo.getUsername(request));
+
+        return RestResponse.removeDispatchSuccess();
+    }
     
     //배차요청, auth check = taxi
 }
