@@ -1,6 +1,7 @@
 package intelligent_taxi.userservice.validator;
 
 import intelligent_taxi.userservice.controller.restResponse.ResponseMessage;
+import intelligent_taxi.userservice.domain.Member;
 import intelligent_taxi.userservice.exception.MemberCustomException;
 import intelligent_taxi.userservice.repository.MemberRepository;
 import intelligent_taxi.userservice.utility.CommonUtils;
@@ -24,11 +25,13 @@ public class ServiceValidator {
         }
     }
 
-    public void validatePassword(String inputPassword, String username) {
-        String foundPassword = memberRepository.findPasswordByUsername(username);
+    public Member validatePassword(String inputPassword, String username) {
+        Member member = memberRepository.findByUsername(username);
 
-        if (!passwordEncoder.matches(inputPassword, foundPassword)) {
+        if (!passwordEncoder.matches(inputPassword, member.getPassword())) {
             throw new MemberCustomException(ResponseMessage.NOT_MATCH_PASSWORD);
         }
+
+        return member;
     }
 }

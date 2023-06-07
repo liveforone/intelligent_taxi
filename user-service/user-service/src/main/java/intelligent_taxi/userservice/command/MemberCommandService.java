@@ -67,9 +67,7 @@ public class MemberCommandService {
     }
 
     public void updatePassword(ChangePasswordRequest changePasswordRequest, String username) {
-        serviceValidator.validatePassword(changePasswordRequest.getOldPassword(), username);
-
-        Member member = memberRepository.findByUsername(username);
+        Member member = serviceValidator.validatePassword(changePasswordRequest.getOldPassword(), username);
         member.updatePassword(changePasswordRequest.getNewPassword());
     }
 
@@ -84,9 +82,7 @@ public class MemberCommandService {
     }
 
     public void withdrawByUsername(WithdrawRequest withdrawRequest, String username) {
-        serviceValidator.validatePassword(withdrawRequest.getPassword(), username);
-
-        Member member = memberRepository.findByUsername(username);
+        Member member = serviceValidator.validatePassword(withdrawRequest.getPassword(), username);
         memberRepository.delete(member);
     }
 }
