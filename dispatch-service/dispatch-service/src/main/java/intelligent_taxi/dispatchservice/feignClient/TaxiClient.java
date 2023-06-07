@@ -11,6 +11,6 @@ import static intelligent_taxi.dispatchservice.feignClient.constant.TaxiUrl.*;
 @FeignClient(name = BASE)
 public interface TaxiClient {
 
-    @GetMapping(TAXI_INFO)
-    TaxiResponse getTaxiInfo(@PathVariable(TaxiParam.ID) Long taxiId);
+    @GetMapping(TAXI_INFO_BY_USERNAME)
+    TaxiResponse getTaxiInfoByUsername(@PathVariable(TaxiParam.USERNAME) String username);
 }

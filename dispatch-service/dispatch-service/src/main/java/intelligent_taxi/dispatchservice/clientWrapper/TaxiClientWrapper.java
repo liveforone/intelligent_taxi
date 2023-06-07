@@ -13,11 +13,11 @@ public class TaxiClientWrapper {
     private final TaxiClient taxiClient;
     private final CircuitBreakerFactory<?, ?> circuitBreakerFactory;
 
-    public TaxiResponse getTaxiInfo(Long taxiId) {
+    public TaxiResponse getTaxiInfoByUsername(String username) {
         return circuitBreakerFactory
                 .create(CircuitLog.DISPATCH_CIRCUIT_LOG.getValue())
                 .run(
-                        () -> taxiClient.getTaxiInfo(taxiId),
+                        () -> taxiClient.getTaxiInfoByUsername(username),
                         throwable -> new TaxiResponse()
                 );
     }
