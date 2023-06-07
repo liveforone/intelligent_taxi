@@ -1,5 +1,7 @@
 package intelligent_taxi.dispatchservice.command;
 
+import intelligent_taxi.dispatchservice.clientWrapper.MemberClientWrapper;
+import intelligent_taxi.dispatchservice.clientWrapper.PayClientWrapper;
 import intelligent_taxi.dispatchservice.clientWrapper.TaxiClientWrapper;
 import intelligent_taxi.dispatchservice.domain.Dispatch;
 import intelligent_taxi.dispatchservice.dto.dispatch.DispatchRequest;
@@ -18,11 +20,18 @@ public class DispatchCommandService {
 
     private final DispatchRepository dispatchRepository;
     private final TaxiClientWrapper taxiClientWrapper;
+    private final PayClientWrapper payClientWrapper;
+    private final MemberClientWrapper memberClientWrapper;
     private final DispatchProducer dispatchProducer;
     private final ServiceValidator serviceValidator;
 
     public Long createDispatch(DispatchRequest requestDto, String username) {
         Dispatch dispatch = Dispatch.create(requestDto, username);
+
+        String bankbookNum = memberClientWrapper.getBankbookNum(username);
+        boolean checkBalance = payClientWrapper.checkBalance(bankbookNum, dispatch.getPrice());
+        serviceValidator.validateCheckBalance(checkBalance);
+
         return dispatchRepository.save(dispatch).getId();
     }
 
