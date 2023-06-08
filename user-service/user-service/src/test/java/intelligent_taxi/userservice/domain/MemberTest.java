@@ -90,7 +90,7 @@ class MemberTest {
 
         //when
         String newPassword = "123456789";
-        member.updatePassword(newPassword);
+        member.updatePassword(newPassword, password);
 
         //then
         assertThat(PasswordUtils.isMatchPassword(newPassword, member.getPassword()))

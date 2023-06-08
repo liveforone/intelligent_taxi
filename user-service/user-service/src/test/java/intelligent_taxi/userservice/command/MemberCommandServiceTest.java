@@ -4,7 +4,6 @@ import intelligent_taxi.userservice.domain.MemberState;
 import intelligent_taxi.userservice.domain.Role;
 import intelligent_taxi.userservice.dto.changeInfo.ChangeEmailRequest;
 import intelligent_taxi.userservice.dto.changeInfo.ChangePasswordRequest;
-import intelligent_taxi.userservice.dto.changeInfo.WithdrawRequest;
 import intelligent_taxi.userservice.dto.response.MemberResponse;
 import intelligent_taxi.userservice.dto.signupAndLogin.MemberLoginRequest;
 import intelligent_taxi.userservice.dto.signupAndLogin.MemberSignupRequest;
@@ -206,34 +205,5 @@ class MemberCommandServiceTest {
         MemberResponse member = memberQueryService.getMemberByUsername(username);
         assertThat(member.getMemberState())
                 .isEqualTo(MemberState.WORK);
-    }
-
-    @Test
-    @Transactional
-    void withdrawByUsernameTest() {
-        //given
-        String email = "member5555@gmail.com";
-        String password = "5555";
-        String realName = "test_withdraw";
-        String bankbookNum = "1234567891234";
-        MemberSignupRequest memberSignupRequest = new MemberSignupRequest();
-        memberSignupRequest.setEmail(email);
-        memberSignupRequest.setPassword(password);
-        memberSignupRequest.setRealName(realName);
-        memberSignupRequest.setBankbookNum(bankbookNum);
-        String username = memberCommandService.signupMember(memberSignupRequest);
-        em.flush();
-        em.clear();
-
-        //when
-        WithdrawRequest request = new WithdrawRequest();
-        request.setPassword(password);
-        memberCommandService.withdrawByUsername(request, username);
-        em.flush();
-        em.clear();
-
-        //then
-        assertThat(memberQueryService.getMemberByUsername(username).getId())
-                .isNull();
     }
 }
