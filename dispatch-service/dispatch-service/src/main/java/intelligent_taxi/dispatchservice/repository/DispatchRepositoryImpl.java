@@ -7,6 +7,8 @@ import intelligent_taxi.dispatchservice.domain.QDispatch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 import static com.querydsl.core.types.dsl.Expressions.*;
 import static com.querydsl.core.types.dsl.MathExpressions.*;
 
@@ -22,35 +24,35 @@ public class DispatchRepositoryImpl implements DispatchCustomRepository {
     private static final double FIVE_KM = 5.0;
     private static final double R = 6371;
 
-    public Dispatch findOneById(Long id) {
-        return queryFactory
+    public Optional<Dispatch> findOneById(Long id) {
+        return Optional.ofNullable(queryFactory
                 .selectFrom(dispatch)
                 .where(dispatch.id.eq(id))
-                .fetchOne();
+                .fetchOne());
     }
 
-    public Dispatch findCurrentOneByUsername(String username) {
-        return queryFactory
+    public Optional<Dispatch> findCurrentOneByUsername(String username) {
+        return Optional.ofNullable(queryFactory
                 .selectFrom(dispatch)
                 .where(dispatch.username.eq(username))
                 .orderBy(dispatch.id.desc())
                 .limit(1)
-                .fetchOne();
+                .fetchOne());
     }
 
 
-    public Dispatch findOneWithinDistance(Double latitude, Double longitude) {
+    public Optional<Dispatch> findOneWithinDistance(Double latitude, Double longitude) {
         NumberExpression<Double> calculatedDistance = calculateDistance(latitude, longitude, dispatch.presentLatitude, dispatch.presentLongitude);
 
-        return queryFactory
+        return Optional.ofNullable(queryFactory
                 .selectFrom(dispatch)
                 .where(
                         calculatedDistance.loe(ONE_KM)
-                        .or(calculatedDistance.loe(THREE_KM))
-                        .or(calculatedDistance.loe(FIVE_KM))
+                                .or(calculatedDistance.loe(THREE_KM))
+                                .or(calculatedDistance.loe(FIVE_KM))
                 )
                 .limit(1)
-                .fetchOne();
+                .fetchOne());
     }
 
     private NumberExpression<Double> calculateDistance(Double lat1, Double lon1, NumberExpression<Double> lat2, NumberExpression<Double> lon2) {
