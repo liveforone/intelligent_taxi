@@ -8,7 +8,6 @@ import intelligent_taxi.userservice.controller.constant.MemberParam;
 import intelligent_taxi.userservice.controller.restResponse.RestResponse;
 import intelligent_taxi.userservice.dto.changeInfo.ChangeEmailRequest;
 import intelligent_taxi.userservice.dto.changeInfo.ChangePasswordRequest;
-import intelligent_taxi.userservice.dto.changeInfo.WithdrawRequest;
 import intelligent_taxi.userservice.dto.response.MemberResponse;
 import intelligent_taxi.userservice.dto.signupAndLogin.MemberLoginRequest;
 import intelligent_taxi.userservice.dto.signupAndLogin.MemberSignupRequest;
@@ -127,15 +126,9 @@ public class MemberController {
     }
 
     @DeleteMapping(WITHDRAW)
-    public ResponseEntity<?> withdraw(
-            @RequestBody @Valid WithdrawRequest requestDto,
-            BindingResult bindingResult,
-            HttpServletRequest request
-    ) {
-        controllerValidator.validateBinding(bindingResult);
-
+    public ResponseEntity<?> withdraw(HttpServletRequest request) {
         String username = authenticationInfo.getUsername(request);
-        memberCommandService.withdrawByUsername(requestDto, username);
+        memberCommandService.withdrawByUsername(username);
         memberProducer.removeTaxi(username);
         log.info(ControllerLog.WITHDRAW_SUCCESS.getValue() + username);
 
