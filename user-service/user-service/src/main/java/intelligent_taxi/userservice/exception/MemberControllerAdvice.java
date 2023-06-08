@@ -1,6 +1,7 @@
 package intelligent_taxi.userservice.exception;
 
 import intelligent_taxi.userservice.controller.restResponse.RestResponse;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,6 +14,11 @@ public class MemberControllerAdvice {
     @ExceptionHandler(BadCredentialsException.class)
     protected ResponseEntity<?> loginFailHandle() {
         return RestResponse.loginFail();
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    protected ResponseEntity<?> duplicateEntityValue() {
+        return RestResponse.duplicateEntityValue();
     }
 
     @ExceptionHandler(MemberCustomException.class)
