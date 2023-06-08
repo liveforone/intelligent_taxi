@@ -1,8 +1,10 @@
 package intelligent_taxi.taxiservice.domain;
 
+import intelligent_taxi.taxiservice.controller.restResponse.ResponseMessage;
 import intelligent_taxi.taxiservice.converter.RegionConverter;
 import intelligent_taxi.taxiservice.converter.TaxiGradeConverter;
 import intelligent_taxi.taxiservice.dto.TaxiRequest;
+import intelligent_taxi.taxiservice.exception.TaxiCustomException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -52,11 +54,19 @@ public class Taxi {
         );
     }
 
-    public void updateRegion(String region) {
+    public void updateRegion(String region, String inputUsername) {
+        if (!inputUsername.equals(username)) {
+            throw new TaxiCustomException(ResponseMessage.NOT_MATCH_USERNAME);
+        }
+
         this.region = Region.matchRegion(region);
     }
 
-    public void updateGrade(String grade) {
+    public void updateGrade(String grade, String inputUsername) {
+        if (!inputUsername.equals(username)) {
+            throw new TaxiCustomException(ResponseMessage.NOT_MATCH_USERNAME);
+        }
+
         this.taxiGrade = TaxiGrade.matchGrade(grade);
     }
 }
