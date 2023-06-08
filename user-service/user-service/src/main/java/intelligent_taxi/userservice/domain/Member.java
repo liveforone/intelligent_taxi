@@ -1,11 +1,13 @@
 package intelligent_taxi.userservice.domain;
 
+import intelligent_taxi.userservice.controller.restResponse.ResponseMessage;
 import intelligent_taxi.userservice.converter.MemberStateConverter;
 import intelligent_taxi.userservice.converter.RoleConverter;
 import intelligent_taxi.userservice.domain.util.MemberBlockPolicy;
 import intelligent_taxi.userservice.domain.util.MemberConstant;
 import intelligent_taxi.userservice.domain.util.PasswordUtils;
 import intelligent_taxi.userservice.dto.signupAndLogin.MemberSignupRequest;
+import intelligent_taxi.userservice.exception.MemberCustomException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,6 +16,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -95,8 +98,13 @@ public class Member implements UserDetails {
         this.email = newEmail;
     }
 
-    public void updatePassword(String password) {
-        this.password = PasswordUtils.encodePassword(password);
+    public void updatePassword(String newPassword, String originalPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (!passwordEncoder.matches(originalPassword, password)) {
+            throw new MemberCustomException(ResponseMessage.NOT_MATCH_PASSWORD);
+        }
+
+        this.password = PasswordUtils.encodePassword(newPassword);
     }
 
     public void increaseReport() {
