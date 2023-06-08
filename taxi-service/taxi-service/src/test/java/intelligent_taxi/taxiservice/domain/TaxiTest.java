@@ -46,7 +46,7 @@ class TaxiTest {
 
         //when
         String updatedRegion = "인천";
-        taxi.updateRegion(updatedRegion);
+        taxi.updateRegion(updatedRegion, username);
 
         //then
         assertThat(taxi.getRegion()).isEqualTo(Region.INCHEON);
@@ -69,7 +69,7 @@ class TaxiTest {
 
         //when
         String updatedGrade = "normal";
-        taxi.updateGrade(updatedGrade);
+        taxi.updateGrade(updatedGrade, username);
 
         //then
         assertThat(taxi.getTaxiGrade()).isEqualTo(TaxiGrade.NORMAL);
