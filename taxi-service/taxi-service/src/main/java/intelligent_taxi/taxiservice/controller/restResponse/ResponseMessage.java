@@ -14,10 +14,11 @@ public enum ResponseMessage {
     DELETE_TAXI_SUCCESS(200, "택시 등록을 성공적으로 삭제하였습니다."),
 
     //==FAIL==//
+    DUPLICATE_ENTITY_VALUE(400, "중복되는 데이터가 존재합니다."),
+    TAXI_IS_NULL(404, "존재하지 않는 택시입니다."),
     NOT_TAXI_MEMBER(401, "택시 권한의 회원이 아닙니다."),
     NOT_EXIST_REGION(404, "존재하지 않는 지역입니다."),
     NOT_EXIST_GRADE(404, "존재하지 않는 택시 등급입니다."),
-    TAXI_IS_NULL(404, "존재하지 않는 택시입니다."),
     NOT_MATCH_USERNAME(400, "기사 정보가 일치하지 않습니다.");
 
     private final int status;
