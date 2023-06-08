@@ -1,15 +1,12 @@
 package intelligent_taxi.userservice.repository;
 
 import intelligent_taxi.userservice.domain.Member;
-import intelligent_taxi.userservice.dto.response.MemberResponse;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface MemberRepositoryCustom {
 
-    Long findIdByEmail(String email);
-    String findPasswordByUsername(String username);
     String findBankbookNumByUsername(String username);
-    Member findByUsername(String username);
-    Member findByEmail(String email);
+    Optional<Member> findByUsername(String username);
+    Optional<Member> findByEmail(String email);
 }

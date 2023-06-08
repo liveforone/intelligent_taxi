@@ -6,6 +6,8 @@ import intelligent_taxi.userservice.domain.QMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 @Repository
 @RequiredArgsConstructor
@@ -13,22 +15,6 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 
     private final JPAQueryFactory queryFactory;
     QMember member = QMember.member;
-
-    public Long findIdByEmail(String email) {
-        return queryFactory
-                .select(member.id)
-                .from(member)
-                .where(member.email.eq(email))
-                .fetchOne();
-    }
-
-    public String findPasswordByUsername(String username) {
-        return queryFactory
-                .select(member.password)
-                .from(member)
-                .where(member.username.eq(username))
-                .fetchOne();
-    }
 
     public String findBankbookNumByUsername(String username) {
         return queryFactory
@@ -38,15 +24,15 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
                 .fetchOne();
     }
 
-    public Member findByUsername(String username) {
-        return queryFactory.selectFrom(member)
+    public Optional<Member> findByUsername(String username) {
+        return Optional.ofNullable(queryFactory.selectFrom(member)
                 .where(member.username.eq(username))
-                .fetchOne();
+                .fetchOne());
     }
 
-    public Member findByEmail(String email) {
-        return queryFactory.selectFrom(member)
+    public Optional<Member> findByEmail(String email) {
+        return Optional.ofNullable(queryFactory.selectFrom(member)
                 .where(member.email.eq(email))
-                .fetchOne();
+                .fetchOne());
     }
 }
