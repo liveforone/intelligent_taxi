@@ -6,6 +6,8 @@ import intelligent_taxi.taxiservice.domain.Taxi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class TaxiRepositoryImpl implements TaxiCustomRepository {
@@ -13,17 +15,17 @@ public class TaxiRepositoryImpl implements TaxiCustomRepository {
     private final JPAQueryFactory queryFactory;
     QTaxi taxi = QTaxi.taxi;
 
-    public Taxi findOneById(Long id) {
-        return queryFactory
+    public Optional<Taxi> findOneById(Long id) {
+        return Optional.ofNullable(queryFactory
                 .selectFrom(taxi)
                 .where(taxi.id.eq(id))
-                .fetchOne();
+                .fetchOne());
     }
 
-    public Taxi findOneByUsername(String username) {
-        return queryFactory
+    public Optional<Taxi> findOneByUsername(String username) {
+        return Optional.ofNullable(queryFactory
                 .selectFrom(taxi)
                 .where(taxi.username.eq(username))
-                .fetchOne();
+                .fetchOne());
     }
 }
