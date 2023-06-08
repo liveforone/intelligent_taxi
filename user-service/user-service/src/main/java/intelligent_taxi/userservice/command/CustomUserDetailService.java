@@ -1,7 +1,9 @@
 package intelligent_taxi.userservice.command;
 
+import intelligent_taxi.userservice.controller.restResponse.ResponseMessage;
 import intelligent_taxi.userservice.domain.Member;
 import intelligent_taxi.userservice.domain.Role;
+import intelligent_taxi.userservice.exception.MemberCustomException;
 import intelligent_taxi.userservice.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
@@ -20,7 +22,8 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return createUserDetails(memberRepository.findByUsername(email));
+        return createUserDetails(memberRepository.findByUsername(email)
+                .orElseThrow(() -> new MemberCustomException(ResponseMessage.MEMBER_IS_NULL)));
     }
 
     private UserDetails createUserDetails(Member member) {
