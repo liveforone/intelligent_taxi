@@ -32,6 +32,7 @@
 
 # 2. 프로젝트 고민점
 * [중복된 값을 가져서는 안되는 Unique 컬럼의 업데이트](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/UNIQUE_COLUMN_UPDATE_PROBLEM.md)
+* [자동배차 알고리즘](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/AUTO_DISPATCH_ALGORITHM.md)
 
 # 3. 서비스별 문서
 * [회원 서비스](https://github.com/liveforone/intelligent_taxi/blob/master/Documents/README_USER.md)
